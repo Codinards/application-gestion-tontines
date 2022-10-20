@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ __u('Edit') }} {{ __t('User') }}{% endblock %}
+
+{% block header %}
+<h1>{{ __u('Edit') }} {{ __t('User') }}</h1>
+{% endblock  %}
+
+{% block body %}
+{{ create_symfrop_link('app_auth_user_index', __('back to list'), {_locale: app.request.locale ?? app.request.defaultLocale}, {class: "btn btn-info"}) }}
+<hr>
+{{ include('auth/user/_form.html.twig', {'button_label': 'Update'}) }}
+
+{{ include('auth/user/_delete_form.html.twig') }}
+{% endblock %}

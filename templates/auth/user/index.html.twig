@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ __t('User') }} {{ __u('index') }}{% endblock %}
+
+{% block header %}
+<h1>{{ __t('User') }} {{ __('index') }}</h1>
+{% endblock  %}
+
+{% block body %}
+
+{{ create_symfrop_link('app_auth_user_new', __('Create new'), {_locale: app.request.locale ?? app.request.defaultLocale}, {class: "btn btn-primary"}) }}
+<hr>
+<table class="table">
+    <thead>
+        <tr>
+                            <th>{{ __u('Id') }}</th>
+                            <th>{{ __u('Pseudo') }}</th>
+                            <th>{{ __u('Roles') }}</th>
+                            <th>{{ __u('Password') }}</th>
+                            <th>{{ __u('Username') }}</th>
+                            <th>{{ __u('Address') }}</th>
+                            <th>{{ __u('PhoneNumber') }}</th>
+                            <th>{{ __u('Image') }}</th>
+                            <th>{{ __u('CreatedAt') }}</th>
+                            <th>{{ __u('UpdatedAt') }}</th>
+                            <th>{{ __u('IsLocked') }}</th>
+                            <th>{{ __u('LockedAt') }}</th>
+                        <th>{{ __('actions') }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.pseudo }}</td>
+                            <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                            <td>{{ user.password }}</td>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.address }}</td>
+                            <td>{{ user.phoneNumber }}</td>
+                            <td>{{ user.image }}</td>
+                            <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                            <td>{{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                            <td>{{ user.isLocked ? 'Yes' : 'No' }}</td>
+                            <td>{{ user.lockedAt ? user.lockedAt|date('Y-m-d H:i:s') : '' }}</td>
+                        <td>
+                {{ create_symfrop_link('app_auth_user_show', __('show'),  {'id': user.id, _locale: app.request.locale ?? app.request.defaultLocale}, {class:"btn btn-info"}) }}
+                {{ create_symfrop_link('app_auth_user_edit', __('edit'),  {'id': user.id, _locale: app.request.locale ?? app.request.defaultLocale}, {class:"btn btn-success"}) }}
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="13">{{ __('no records found') }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

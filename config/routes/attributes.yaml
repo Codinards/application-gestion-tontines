@@ -1,0 +1,3 @@
+controllers:
+   resource: '@SymfropBundle/Controller/'
+   type: attribute

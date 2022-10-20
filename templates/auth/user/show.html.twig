@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ __t('User') }} : User{% endblock %}
+
+{% block header %}
+<h1>{{ __t('User') }} : {{ User }}</h1>
+{% endblock  %}
+
+{% block body %}
+{{ create_symfrop_link('app_auth_user_index', __('back to list'), {_locale: app.request.locale ?? app.request.defaultLocale}, {class: "btn btn-info"}) }}
+{{ create_symfrop_link('app_auth_user_edit', __('edit'),  {'id': user.id, _locale: app.request.locale ?? app.request.defaultLocale}, {class:"btn btn-success"}) }}
+<hr>
+<table class="table">
+    <tbody>
+                    <tr>
+                <th>{{ __u('Id') }}</th>
+                <td>{{ user.id }}</td>
+            </tr>
+                    <tr>
+                <th>{{ __u('Pseudo') }}</th>
+                <td>{{ user.pseudo }}</td>
+            </tr>
+                    <tr>
+                <th>{{ __u('Roles') }}</th>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+            </tr>
+                    <tr>
+                <th>{{ __u('Password') }}</th>
+                <td>{{ user.password }}</td>
+            </tr>
+                    <tr>
+                <th>{{ __u('Username') }}</th>
+                <td>{{ user.username }}</td>
+            </tr>
+                    <tr>
+                <th>{{ __u('Address') }}</th>
+                <td>{{ user.address }}</td>
+            </tr>
+                    <tr>
+                <th>{{ __u('PhoneNumber') }}</th>
+                <td>{{ user.phoneNumber }}</td>
+            </tr>
+                    <tr>
+                <th>{{ __u('Image') }}</th>
+                <td>{{ user.image }}</td>
+            </tr>
+                    <tr>
+                <th>{{ __u('CreatedAt') }}</th>
+                <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+                    <tr>
+                <th>{{ __u('UpdatedAt') }}</th>
+                <td>{{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+                    <tr>
+                <th>{{ __u('IsLocked') }}</th>
+                <td>{{ user.isLocked ? 'Yes' : 'No' }}</td>
+            </tr>
+                    <tr>
+                <th>{{ __u('LockedAt') }}</th>
+                <td>{{ user.lockedAt ? user.lockedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            </tbody>
+</table>
+
+{{ include('auth/user/_delete_form.html.twig') }}
+{% endblock %}
